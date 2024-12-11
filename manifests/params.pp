@@ -4,7 +4,7 @@ class drbd::params {
   $service_enable = true
   $service_ensure = 'running'
 
-  case $::osfamily {
+  case $facts['os']['family'] {
     'Debian': {
       $package = [ 'drbd8-utils' ]
       $config = '/etc/drbd.conf'
@@ -12,7 +12,7 @@ class drbd::params {
       $service_name = 'drbd'
     }
     default: {
-      fail("\"${module_name}\" is not supported on \"${::osfamily}\"")
+      fail("\"${module_name}\" is not supported on \"${facts['os']['family']}\"")
     }
   }
 
